@@ -48,12 +48,19 @@ main {
 
 .tarjeta-actividad {
     background: var(--card-bg);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     border-top: 4px solid var(--primary-color);
-}
 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+.tarjeta-actividad:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+}
 .btn-enlace {
     display: inline-block;
     margin-top: 1rem;
