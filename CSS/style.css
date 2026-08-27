@@ -61,28 +61,28 @@ main {
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
 }
-.bbtn-enlace {
+.btn-enlace {
     display: inline-block;
-
     margin-top: 1rem;
     padding: 0.7rem 1.2rem;
 
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    background-color: #3b82f6;
+    color: #ffffff;
 
-    color: white;
     text-decoration: none;
-
     border-radius: 8px;
+
     font-size: 0.9rem;
     font-weight: 600;
 
+    opacity: 1;
+
     transition: transform 0.2s ease,
-                box-shadow 0.2s ease;
+                background-color 0.2s ease;
 }
 
 .btn-enlace:hover {
+    background-color: #2563eb;
+    opacity: 1;
     transform: translateY(-3px);
-
-    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
 }
-
