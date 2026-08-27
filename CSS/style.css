@@ -15,16 +15,24 @@ body {
 }
 
 header {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
     color: white;
-    padding: 2rem;
+    padding: 5ren 2rem;
     text-align: center;
 }
+header h1 {
+    font-size: 3ren;'
+    margin: 0 0 1rem 0;
+}
 
+header p {
+    margin: 0 0 1rem 0;
+    opacity: 0.9;
+}
 main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    max-width: 1100px;
+    margin: 4rem auto;
+    padding: 0 2rem;
 }
 
 .unidad-seccion {
