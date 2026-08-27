@@ -1,9 +1,9 @@
 /* css/styles.css */
-:root {
-    --bg-color: #f4f6f9;
-    --text-color: #333;
-    --primary-color: #1a5276;
-    --card-bg: #ffffff;
+::root {
+    --bg-color: #0f172a;
+    --text-color: #e2e8f0;
+    --primary-color: #3b82f6;
+    --card-bg: #1e293b;
 }
 
 body {
