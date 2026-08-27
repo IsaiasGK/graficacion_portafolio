@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(red);
+    background-color: red;
     color: var(--text-color);
     margin: 0;
     padding: 0;
