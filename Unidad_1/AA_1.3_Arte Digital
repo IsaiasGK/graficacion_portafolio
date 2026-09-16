@@ -1,1 +1,76 @@
+function setup() {
+  createCanvas(600, 400);
+  noLoop();
+}
 
+function draw() {
+  // CieloX
+  background(23, 63, 109);
+
+  // Luna
+  noStroke();
+  fill(255, 217, 102);
+  ellipse(520, 65, 65, 65);
+
+  // Estrellas
+  fill(255, 230, 153);
+  ellipse(100, 70, 25, 25);
+  ellipse(200, 110, 20, 20);
+  ellipse(300, 55, 25, 25);
+  ellipse(410, 120, 20, 20);
+
+  // Líneas del cielo
+  stroke(102, 170, 204);
+  strokeWeight(5);
+  line(30, 150, 180, 130);
+  line(180, 130, 330, 160);
+  line(330, 160, 470, 140);
+  line(470, 140, 580, 160);
+
+  stroke(255, 217, 102);
+  line(50, 190, 180, 170);
+  line(350, 190, 550, 175);
+
+  // Montañas
+  noStroke();
+  fill(36, 71, 94);
+  triangle(0, 280, 150, 170, 300, 280);
+  triangle(200, 280, 400, 160, 600, 280);
+
+  // Suelo
+  fill(25, 56, 44);
+  rect(0, 270, 600, 130);
+
+  // Casas
+  dibujarCasa(220, 280);
+  dibujarCasa(310, 300);
+  dibujarCasa(400, 275);
+
+  // Iglesia
+  fill(201, 155, 82);
+  rect(350, 245, 45, 90);
+
+  fill(51, 38, 54);
+  triangle(340, 245, 372, 190, 405, 245);
+
+  // Ciprés
+  fill(16, 40, 32);
+  ellipse(90, 265, 75, 230);
+  triangle(50, 340, 90, 100, 130, 340);
+}
+
+function dibujarCasa(x, y) {
+  noStroke();
+
+  // Pared
+  fill(201, 135, 70);
+  rect(x, y, 60, 50);
+
+  // Techo
+  fill(73, 45, 42);
+  triangle(x - 5, y, x + 30, y - 30, x + 65, y);
+
+  // Ventana
+  fill(255, 224, 102);
+  rect(x + 22, y + 20, 13, 15);
+}
