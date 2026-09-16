@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Locomotora Canvas</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: white;
+        }
+
+        canvas {
+            display: block;
+            margin: 20px auto;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<canvas id="canvas" width="570" height="260"></canvas>
+
+<script>
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+ctx.strokeStyle = "black";
+ctx.fillStyle = "white";
+ctx.lineWidth = 2.5;
+
+
+// ==========================================
+// FUNCIONES
+// ==========================================
+
+// Rectángulo
+function rect(x, y, ancho, alto) {
+    ctx.beginPath();
+    ctx.rect(x, y, ancho, alto);
+    ctx.fill();
+    ctx.stroke();
+}
+
+
+// Círculo
+function circulo(x, y, radio) {
+    ctx.beginPath();
+    ctx.arc(x, y, radio, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+}
+
+
+// Línea
+function linea(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+}
+
+
+// Triángulo
+function triangulo(x1, y1, x2, y2, x3, y3) {
+    ctx.beginPath();
+
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.lineTo(x3, y3);
+
+    ctx.closePath();
+
+    ctx.fill();
+    ctx.stroke();
+}
+
+
+// ==========================================
+// CUERPO DEL TREN
+// ==========================================
+
+// Parte delantera
+rect(67, 118, 130, 62);
+
+
+// ==========================================
+// CABINA
+// ==========================================
+
+rect(197, 59, 126, 121);
+
+
+// ==========================================
+// PARTE FRONTAL DEL TREN
+// ==========================================
+
+// Punta frontal
+triangulo(
+    67, 118,
+    41, 146,
+    67, 160
+);
+
+
+// Parte inferior inclinada
+triangulo(
+    67, 160,
+    29, 236,
+    67, 236
+);
+
+
+// ==========================================
+// CHIMENEA
+// ==========================================
+
+// Tubo de la chimenea
+rect(82, 78, 25, 40);
+
+
+// Parte superior de la chimenea
+triangulo(
+    68, 75,
+    94, 39,
+    121, 75
+);
+
+
+// ==========================================
+// CUADRADO DELANTERO
+// ==========================================
+
+// Cuadrado pequeño
+// Se movió un poco hacia la derecha
+rect(118, 95, 25, 23);
+
+
+// ==========================================
+// TECHO DE LA CABINA
+// ==========================================
+
+// Contorno completo del techo
+ctx.beginPath();
+
+ctx.moveTo(192, 59);
+ctx.lineTo(214, 32);
+ctx.lineTo(306, 32);
+ctx.lineTo(329, 59);
+
+ctx.closePath();
+
+ctx.fill();
+ctx.stroke();
+
+
+// ==========================================
+// DECORACIÓN DEL TECHO
+// ==========================================
+
+// Primer triángulo
+linea(214, 32, 240, 59);
+
+// Segundo triángulo
+linea(240, 59, 267, 32);
+
+// Tercer triángulo
+linea(267, 32, 294, 59);
+
+// Cuarta diagonal
+linea(294, 59, 306, 32);
+
+
+// ==========================================
+// VENTANA DE LA CABINA
+// ==========================================
+
+rect(220, 74, 72, 45);
+
+
+// ==========================================
+// CÍRCULO PEQUEÑO DE LA CABINA
+// ==========================================
+
+circulo(293, 139, 12);
+
+
+// ==========================================
+// RUEDAS
+// ==========================================
+
+function rueda(x, y) {
+
+    // Círculo exterior
+    circulo(x, y, 29);
+
+    // Círculo interior
+    circulo(x, y, 12);
+}
+
+
+// ==========================================
+// CUATRO RUEDAS
+// ==========================================
+
+rueda(106, 208);
+rueda(171, 208);
+rueda(236, 208);
+rueda(301, 208);
+
+
+// ==========================================
+// LEYENDA DE LA DERECHA
+// ==========================================
+
+
+// ------------------------------------------
+// 1. CUADRADO
+// ------------------------------------------
+
+rect(404, 46, 29, 29);
+
+linea(462, 60, 501, 60);
+
+
+// ------------------------------------------
+// 2. CÍRCULO
+// ------------------------------------------
+
+circulo(418, 104, 16);
+
+linea(462, 119, 501, 119);
+
+
+// ------------------------------------------
+// 3. TRIÁNGULO
+// ------------------------------------------
+
+triangulo(
+    418, 130,
+    404, 161,
+    432, 161
+);
+
+linea(462, 162, 501, 162);
+
+
+// ------------------------------------------
+// 4. RECTÁNGULO
+// ------------------------------------------
+
+rect(397, 185, 41, 22);
+
+linea(462, 207, 501, 207);
+
+
+</script>
+
+</body>
+</html>
