@@ -1,0 +1,113 @@
+function setup() {
+  createCanvas(700, 350);
+  angleMode(DEGREES);
+}
+
+function draw() {
+  background(230);
+
+  // Etapa Huevo.
+  push();
+  translate(70, 180);
+  rotate(-5);
+  scale(0.6);
+
+  fill(255, 245, 210);
+  stroke(0);
+  ellipse(0, 0, 60, 80);
+
+  pop();
+
+
+  // Etapa Pollo.
+  push();
+  translate(200, 180);
+  rotate(5);
+  scale(0.7);
+
+  dibujarPollo(255, 220, 50, false);
+
+  pop();
+
+
+  // Etapa Pollo Jovenazo
+  push();
+  translate(330, 180);
+  rotate(-3);
+  scale(0.85);
+
+  dibujarPollo(245, 190, 40, false);
+
+  pop();
+
+
+  // Etapa Pollo Adulto entrando alos 30
+  push();
+  translate(470, 180);
+  rotate(3);
+  scale(1);
+
+  dibujarPollo(200, 110, 50, true);
+
+  pop();
+
+
+  // Etapa Pollo viejo cobrando los 65 y más
+  push();
+  translate(610, 180);
+  rotate(-5);
+  scale(1.1);
+
+  dibujarPollo(150, 150, 150, true);
+
+  pop();
+
+
+  // Nombres
+  fill(0);
+  noStroke();
+  textAlign(CENTER);
+  textSize(14);
+}
+
+
+// POLLO
+function dibujarPollo(r, g, b, cresta) {
+
+  stroke(0);
+  strokeWeight(2);
+
+  // Cuerpo
+  fill(r, g, b);
+  ellipse(0, 20, 70, 65);
+
+  // Cabeza
+  ellipse(0, -30, 50, 50);
+
+  // Cresta
+  if (cresta) {
+    fill(220, 50, 50);
+    ellipse(-12, -57, 18, 20);
+    ellipse(0, -62, 18, 25);
+    ellipse(12, -57, 18, 20);
+  }
+
+  // Ojos
+  fill(0);
+  ellipse(-10, -35, 6, 6);
+  ellipse(10, -35, 6, 6);
+
+  // Pico
+  fill(255, 150, 0);
+  triangle(-7, -22, 7, -22, 0, -12);
+
+  // Alas
+  fill(r, g, b);
+  ellipse(-28, 20, 20, 35);
+  ellipse(28, 20, 20, 35);
+
+  // Patas
+  stroke(255, 150, 0);
+  line(-15, 50, -15, 70);
+  line(15, 50, 15, 70);
+}
