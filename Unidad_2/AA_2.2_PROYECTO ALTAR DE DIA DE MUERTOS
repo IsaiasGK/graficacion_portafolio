@@ -1,0 +1,341 @@
+
+let logo;
+let velasEncendidas = true;
+
+async function setup() {
+  createCanvas(windowWidth, windowHeight);
+  rectMode(CENTER);
+
+  // Cargar logotipo del TecNM
+  try {
+    logo = await loadImage("tecnm.png");
+  } catch (error) {
+    console.log("No se pudo cargar el logotipo");
+  }
+}
+
+function draw() {
+
+  // FONDO DEGRADADO
+  let color1 = color(202, 117, 255);
+  let color2 = color(118, 75, 191);
+
+  for (let y = 0; y < height; y++) {
+    let cambio = map(y, 0, height, 0, 1);
+    let c = lerpColor(color1, color2, cambio);
+    stroke(c);
+    line(0, y, width, y);
+  }
+
+  // CUERDA DEL PAPEL PICADO
+  stroke(90, 50, 30);
+  strokeWeight(3);
+  line(0, 20, width, 20);
+
+  // PAPEL PICADO ANIMADO
+  for (let x = 40; x < width; x += 100) {
+    push();
+
+    let viento = sin(frameCount * 0.03 + x * 0.02) * 0.15;
+
+    translate(x, 20);
+    rotate(viento);
+
+    noStroke();
+    fill(255, 170, 50);
+    rect(0, 30, 70, 60);
+
+    fill(118, 75, 191);
+    ellipse(0, 25, 20, 20);
+    ellipse(-20, 45, 10, 10);
+    ellipse(20, 45, 10, 10);
+
+    pop();
+  }
+
+  // ESTRUCTURA DEL ALTAR
+  push();
+
+  translate(width / 2, height / 2);
+
+  let escala = min(1, width / 800, height / 650);
+  scale(escala);
+
+  noStroke();
+
+  // NIVEL INFERIOR
+  fill(130, 70, 45);
+  rect(0, 200, 700, 100);
+
+  // NIVEL MEDIO
+  fill(155, 90, 60);
+  rect(0, 100, 550, 100);
+
+  // NIVEL SUPERIOR
+  fill(255);
+  rect(0, 0, 400, 100);
+
+  // MANTELES
+  fill(255);
+  rect(0, 50, 420, 20);
+  rect(0, 150, 570, 20);
+  rect(0, 250, 720, 20);
+
+  // FLORES DE CEMPASÚCHIL
+  flor(-150, -65);
+  flor(150, -65);
+
+  flor(-220, 65);
+  flor(220, 65);
+
+  flor(-300, 165);
+  flor(-200, 165);
+  flor(200, 165);
+  flor(300, 165);
+
+  // VELAS INTERACTIVAS
+  vela(-100, -75, escala);
+  vela(100, -75, escala);
+
+  vela(-180, 55, escala);
+  vela(180, 55, escala);
+
+  vela(-250, 155, escala);
+  vela(250, 155, escala);
+
+  // CALAVERITAS ANIMADAS
+  calavera(0, -55);
+  calavera(-100, 55);
+  calavera(100, 55);
+  calavera(0, 155);
+
+  // ELEMENTOS DE INGENIERÍA EN SISTEMAS
+  monitor(0, 55);
+  microchip(-100, 155);
+
+  // LOGOTIPO DEL TECNM
+  push();
+
+  imageMode(CENTER);
+  noStroke();
+
+  // Marco dorado
+  fill(190, 145, 45);
+  rect(0, -135, 125, 125);
+
+  // Fondo blanco
+  fill(255);
+  rect(0, -135, 112, 112);
+
+  // Imagen del TecNM
+  if (logo) {
+    image(logo, 0, -135, 100, 100);
+  }
+
+  pop();
+  pop();
+}
+
+// FLORES DE CEMPASÚCHIL
+function flor(x, y) {
+  push();
+
+  translate(x, y);
+  rotate(sin(frameCount * 0.02 + x) * 0.1);
+
+  noStroke();
+  fill(255, 140, 0);
+
+  for (let i = 0; i < 8; i++) {
+    ellipse(0, -12, 15, 20);
+    rotate(PI / 4);
+  }
+
+  fill(255, 210, 0);
+  ellipse(0, 0, 15, 15);
+
+  pop();
+}
+
+// VELAS INTERACTIVAS
+function vela(x, y, escala) {
+  push();
+
+  translate(x, y);
+  noStroke();
+
+  // Cuerpo de la vela
+  fill(255, 240, 210);
+  rect(0, 0, 20, 50);
+
+  // Parte superior
+  fill(230, 210, 180);
+  ellipse(0, -25, 20, 6);
+
+  // Mecha
+  stroke(60, 40, 30);
+  strokeWeight(2);
+  line(0, -25, 0, -33);
+
+  // Solo mostrar llamas cuando estén encendidas
+  if (velasEncendidas) {
+
+    let movimiento = sin(frameCount * 0.1 + x) * 3;
+
+    let llamaX = width / 2 + x * escala;
+    let llamaY = height / 2 + (y - 45) * escala;
+
+    let distancia = dist(mouseX, mouseY, llamaX, llamaY);
+
+    // Reacción al movimiento del mouse
+    if (distancia < 120) {
+      if (mouseX < llamaX) {
+        movimiento = 15;
+      } else {
+        movimiento = -15;
+      }
+    }
+
+    // ANIMACIÓN CON SCALE
+    push();
+
+    translate(0, -33);
+
+    let tamano = 1 + sin(frameCount * 0.12 + x) * 0.1;
+    scale(tamano);
+
+    noStroke();
+
+    // Llama naranja
+    fill(255, 140, 0);
+    triangle(-8, 0, 8, 0, movimiento, -25);
+
+    // Llama amarilla
+    fill(255, 230, 0);
+    ellipse(movimiento / 3, -5, 7, 13);
+
+    pop();
+  }
+
+  pop();
+}
+
+// CALAVERITAS ANIMADAS
+function calavera(x, y) {
+  push();
+
+  translate(x, y);
+
+  rotate(sin(frameCount * 0.03 + x) * 0.12);
+
+  noStroke();
+
+  // Cabeza
+  fill(255, 245, 220);
+  ellipse(0, 0, 65, 60);
+
+  // Mandíbula
+  rect(0, 25, 40, 25);
+
+  // Ojos
+  fill(60, 40, 70);
+  ellipse(-15, -5, 18, 22);
+  ellipse(15, -5, 18, 22);
+
+  // Nariz
+  triangle(-5, 13, 5, 13, 0, 5);
+
+  // Boca
+  stroke(60, 40, 70);
+  strokeWeight(2);
+  line(-15, 30, 15, 30);
+
+  // Dientes
+  line(-8, 23, -8, 36);
+  line(0, 23, 0, 36);
+  line(8, 23, 8, 36);
+
+  // BRAZO QUE SALUDA
+  push();
+
+  translate(32, 15);
+  rotate(sin(frameCount * 0.08 + x) * 0.5);
+
+  stroke(255, 245, 220);
+  strokeWeight(8);
+  line(0, 0, 25, -20);
+
+  noStroke();
+  fill(255, 245, 220);
+  ellipse(25, -20, 12, 12);
+
+  pop();
+  pop();
+}
+
+// MONITOR CON CÓDIGO
+function monitor(x, y) {
+  push();
+
+  translate(x, y);
+  noStroke();
+
+  // Marco
+  fill(35, 35, 45);
+  rect(0, 0, 65, 45, 5);
+
+  // Pantalla
+  fill(15, 25, 35);
+  rect(0, 0, 55, 35);
+
+  // Código
+  fill(80, 255, 120);
+  textSize(12);
+  textAlign(CENTER, CENTER);
+  text("</>", 0, 0);
+
+  // Soporte
+  fill(80);
+  rect(0, 27, 8, 10);
+  rect(0, 32, 35, 5);
+
+  pop();
+}
+
+// MICROCHIP
+function microchip(x, y) {
+  push();
+
+  translate(x, y);
+  noStroke();
+
+  // Patitas
+  fill(190);
+
+  for (let i = -20; i <= 20; i += 10) {
+    rect(i, -27, 5, 12);
+    rect(i, 27, 5, 12);
+    rect(-27, i, 12, 5);
+    rect(27, i, 12, 5);
+  }
+
+  // Cuerpo
+  fill(35, 60, 50);
+  rect(0, 0, 50, 50, 5);
+
+  // Centro
+  fill(80, 200, 130);
+  rect(0, 0, 30, 30, 3);
+
+  pop();
+}
+
+// ENCENDER Y APAGAR LAS VELAS
+function mousePressed() {
+  velasEncendidas = !velasEncendidas;
+}
+
+// ADAPTAR EL LIENZO
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
