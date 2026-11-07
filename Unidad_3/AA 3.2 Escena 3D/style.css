@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Evita que salgan barras de desplazamiento */
+    background-color: #1a1a1a; /* Fondo oscuro para resaltar la figura */
+}
+
+canvas {
+    display: block;
+}
